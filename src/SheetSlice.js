@@ -52,7 +52,6 @@ export const sheetSlice = createSlice({
     },
     removeCol: (state, e) => {
       const tmp = [...state.data];
-      // for (let r =0;r<)
       tmp.splice(e.payload.col, 1);
       state.data = tmp;
       localStorage.setItem("sheet", JSON.stringify(tmp));

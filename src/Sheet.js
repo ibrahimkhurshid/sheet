@@ -2,14 +2,7 @@ import React, { useEffect, useState } from "react";
 import Ask from "./Ask";
 import { Input, Table, RemoveButton } from "./CustomComponents";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  initData,
-  setData,
-  resetData,
-  removeRow,
-  removeCol,
-} from "./SheetSlice";
-import CustomComponents from "./CustomComponents";
+import { initData, setData, removeRow, removeCol } from "./SheetSlice";
 
 const Sheet = () => {
   const [row, setRow] = useState(10);
@@ -26,7 +19,7 @@ const Sheet = () => {
               onClick={() => dispatch(removeCol({ col: c }))}
               tabIndex={-1}
             >
-              {c}
+              {c + 1}
             </RemoveButton>
           </th>
         ))}
@@ -41,7 +34,7 @@ const Sheet = () => {
           onClick={() => dispatch(removeRow({ row: r }))}
           tabIndex={-1}
         >
-          {r}
+          {r + 1}
         </RemoveButton>
         {Array.from(Array(data[0].length).keys()).map((c) => (
           <td>
