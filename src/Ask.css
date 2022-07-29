@@ -1,0 +1,48 @@
+.ask-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 80vh;
+    min-width: 97vw;
+}
+
+.child {
+    margin: auto;
+    padding: 50px;
+}
+
+.page-heading {
+    text-align: center;
+    padding: 20px 0px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.inputs {}
+
+.input {
+    display: inline-block;
+    margin: 0px 10px;
+    width: 40%;
+}
+
+.text-input {
+    border: 2px solid rgb(145, 145, 145);
+    border-radius: 25px;
+    padding: 1rem;
+    width: 80%;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.label {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.create-btn {
+    width: 100%;
+    height: 2rem;
+}
