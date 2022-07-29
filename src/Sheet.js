@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Ask from "./Ask";
 import { Input, Table, RemoveButton } from "./CustomComponents";
 import { useDispatch } from "react-redux";
 import CustomComponents from "./CustomComponents";
@@ -34,10 +35,14 @@ const Sheet = () => {
   ));
   return (
     <div>
-      <Table>
-        <thead>{theadContent}</thead>
-        <tbody>{tbodyContent}</tbody>
-      </Table>
+      {false ? (
+        <Table>
+          <thead>{theadContent}</thead>
+          <tbody>{tbodyContent}</tbody>
+        </Table>
+      ) : (
+        <Ask />
+      )}
     </div>
   );
 };
