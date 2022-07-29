@@ -29,6 +29,7 @@ export const Input = styled.input`
   width: 5rem;
   height: 1.2rem;
   padding: 1px;
+  color: rgb(100, 100, 100);
   &::placeholder {
     color: rgb(220, 220, 220);
   }
@@ -36,6 +37,7 @@ export const Input = styled.input`
     cursor: default;
   }
   &:focus {
+    color: rgb(5, 5, 5);
     outline: none;
     padding: 0px;
     border: 2px solid #1a73e8;

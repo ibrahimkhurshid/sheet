@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import Ask from "./Ask";
 import { Input, Table, RemoveButton } from "./CustomComponents";
 import { useDispatch, useSelector } from "react-redux";
-import { initData, setData, resetData } from "./SheetSlice";
+import {
+  initData,
+  setData,
+  resetData,
+  removeRow,
+  removeCol,
+} from "./SheetSlice";
 import CustomComponents from "./CustomComponents";
 
 const Sheet = () => {
@@ -16,7 +22,10 @@ const Sheet = () => {
         <th>.</th>
         {Array.from(Array(data[0].length).keys()).map((c) => (
           <th>
-            <RemoveButton onClick={() => alert(c)} tabIndex={-1}>
+            <RemoveButton
+              onClick={() => dispatch(removeCol({ col: c }))}
+              tabIndex={-1}
+            >
               {c}
             </RemoveButton>
           </th>
@@ -28,16 +37,19 @@ const Sheet = () => {
   const tbodyContent = (data) => {
     return Array.from(Array(data.length).keys()).map((r) => (
       <tr>
-        <RemoveButton onClick={() => alert(r)} tabIndex={-1}>
+        <RemoveButton
+          onClick={() => dispatch(removeRow({ row: r }))}
+          tabIndex={-1}
+        >
           {r}
         </RemoveButton>
         {Array.from(Array(data[0].length).keys()).map((c) => (
           <td>
             <Input
+              key={data[r][c]}
               defaultValue={data[r][c]}
               onBlur={(e) => {
                 dispatch(setData({ row: r, col: c, val: e.target.value }));
-                console.log(e.target.value);
               }}
             ></Input>
           </td>
@@ -45,7 +57,6 @@ const Sheet = () => {
       </tr>
     ));
   };
-  console.log(data);
   const rc = { row: data.length, col: data.length === 0 ? 0 : data[0].length };
   useEffect(() => {
     dispatch(initData());
@@ -53,9 +64,6 @@ const Sheet = () => {
 
   return (
     <div>
-      {console.log(data)}
-      {console.log("row", rc.row)}
-      {console.log("col", rc.col)}
       {rc.row !== 0 ? (
         <Table>
           <thead>{theadContent()}</thead>
