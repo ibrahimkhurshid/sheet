@@ -52,7 +52,13 @@ export const sheetSlice = createSlice({
     },
     removeCol: (state, e) => {
       const tmp = [...state.data];
-      tmp.splice(e.payload.col, 1);
+      for (let r = 0; r < tmp.length; r++) {
+        tmp[r].splice(e.payload.col, 1);
+      }
+      // if a row has no columns left, delete that row
+      if (tmp[0][0] === undefined) {
+        tmp.splice(0, tmp.length);
+      }
       state.data = tmp;
       localStorage.setItem("sheet", JSON.stringify(tmp));
     },
