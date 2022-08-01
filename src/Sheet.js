@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Ask from "./Ask";
 import { Input, Table, RemoveButton } from "./CustomComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { initData, setData, removeRow, removeCol } from "./SheetSlice";
+import Footer from "./Footer";
+import "./footer.css";
 
 const Sheet = () => {
-  const [row, setRow] = useState(10);
-  const [col, setCol] = useState(10);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.sheet.data);
   const theadContent = () => {
     return (
       <tr>
-        <th>.</th>
+        <th
+          style={{
+            width: "fit-content",
+            color: "#1a73e8",
+            "font-size": "0.8rem",
+          }}
+        >{`${data.length} x ${data[0].length}`}</th>
         {Array.from(Array(data[0].length).keys()).map((c) => (
           <th>
             <RemoveButton
+              title={`remove col:${c + 1}`}
               onClick={() => dispatch(removeCol({ col: c }))}
               tabIndex={-1}
             >
@@ -31,6 +38,7 @@ const Sheet = () => {
     return Array.from(Array(data.length).keys()).map((r) => (
       <tr>
         <RemoveButton
+          title={`remove row:${r + 1}`}
           onClick={() => dispatch(removeRow({ row: r }))}
           tabIndex={-1}
         >
@@ -40,6 +48,7 @@ const Sheet = () => {
           <td>
             <Input
               key={data[r][c]}
+              data-loc={`${r}:${c}`}
               defaultValue={data[r][c]}
               onBlur={(e) => {
                 dispatch(setData({ row: r, col: c, val: e.target.value }));
@@ -55,17 +64,18 @@ const Sheet = () => {
     dispatch(initData());
   }, []);
 
-  return (
-    <div>
-      {rc.row !== 0 ? (
+  return rc.row !== 0 ? (
+    <>
+      <>
         <Table>
           <thead>{theadContent()}</thead>
           <tbody>{tbodyContent(data)}</tbody>
         </Table>
-      ) : (
-        <Ask />
-      )}
-    </div>
+      </>
+      <Footer />
+    </>
+  ) : (
+    <Ask />
   );
 };
 

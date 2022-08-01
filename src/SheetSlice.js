@@ -24,21 +24,22 @@ export const sheetSlice = createSlice({
     },
     initData: (state) => {
       if (localStorage.getItem("sheet") !== null) {
-        let tmp = JSON.parse(localStorage.getItem("sheet"));
+        const tmp = JSON.parse(localStorage.getItem("sheet"));
         state.data = tmp;
       } else {
-        let tmp = [];
+        const tmp = [];
         localStorage.setItem("sheet", JSON.stringify(tmp));
         state.data = tmp;
       }
     },
-    resetData: (state) => {
-      let tmp = [];
+    deleteData: (state) => {
+      const tmp = [];
       state.data = tmp;
-      localStorage.setItem("sheet", tmp);
+      console.log("After", state.data);
+      localStorage.setItem("sheet", JSON.stringify(tmp));
     },
     setData: (state, e) => {
-      let tmp = [...state.data];
+      const tmp = [...state.data];
       const obj = e.payload;
       tmp[obj.row][obj.col] = obj.val;
       state.data = tmp;
@@ -62,9 +63,26 @@ export const sheetSlice = createSlice({
       state.data = tmp;
       localStorage.setItem("sheet", JSON.stringify(tmp));
     },
+    resetData: (state) => {
+      const obj = {
+        row: state.data.length,
+        col: state.data[0].length,
+        fill: "",
+      };
+      const tmp = genArr(obj.row, obj.col, obj.fill);
+      state.data = tmp;
+      localStorage.setItem("sheet", JSON.stringify(tmp));
+    },
   },
 });
 
-export const { initData, resetData, setData, newData, removeRow, removeCol } =
-  sheetSlice.actions;
+export const {
+  initData,
+  resetData,
+  deleteData,
+  setData,
+  newData,
+  removeRow,
+  removeCol,
+} = sheetSlice.actions;
 export default sheetSlice.reducer;

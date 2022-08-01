@@ -16,7 +16,7 @@ const Ask = () => {
             <input
               className="text-input"
               onChange={(e) => (row.current = e.target.value)}
-              type="numeric"
+              type="number"
               placeholder="25..."
             ></input>
             <p className="label">Rows</p>
@@ -25,7 +25,7 @@ const Ask = () => {
             <input
               onChange={(e) => (col.current = e.target.value)}
               className="text-input"
-              type="numeric"
+              type="number"
               placeholder="15..."
             ></input>
             <p className="label">Columns</p>

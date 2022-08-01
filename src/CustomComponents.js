@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const RemoveButton = styled.button`
   border-style: none;
+  margin: 0;
+  border-collapse: collapse;
   width: 100%;
+  min-width: 3rem;
   height: 1.2rem;
   &:hover {
     background-color: #e9e9e9;
