@@ -127,8 +127,15 @@ const Sheet = () => {
           <thead>{theadContent()}</thead>
           <tbody>{tbodyContent(data)}</tbody>
         </Table>
-        <button type="submit">SAVE FORMIK</button>
+        {Object.keys(formik.errors).length >= 1 ? (
+          <button type="submit" disabled={true}>
+            Submit Formik
+          </button>
+        ) : (
+          <button type="submit">Submit Formik</button>
+        )}
       </form>
+      {console.log("keys", Object.keys(formik.errors).length)}
       <Footer />
     </>
   ) : (
